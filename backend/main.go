@@ -3,16 +3,18 @@ package main
 import (
 	"fmt"
 	"net/http"
-	"github.com/inagib21/golang-chat/pkg/websocket"
+
+	"github.com/inagib21/golang-chat/package/websocket"
 )
 
-func serveWS(pool *websocket.Pool, w http.ResponseWriter, r *http.Request){
+func serveWS(pool *websocket.Pool, w http.ResponseWriter, r *http.Request) {
 	fmt.Println("websocket endpoint reached")
 
-	conn, err:- websocket.Upgrade(w, r)
+	conn, err := websocket.Upgrade(w, r)
 
-	if err!=nil{
-		fmt.Fprint(w, "%+v\n",err)
+	if err != nil {
+		fmt.Fprintf(w, "%+v\n", err) // Use Fprintf to format and print the error
+		return                       // Return early in case of an error
 	}
 
 	client := &websocket.Client{
@@ -23,17 +25,16 @@ func serveWS(pool *websocket.Pool, w http.ResponseWriter, r *http.Request){
 	client.Read()
 }
 
-
-func setupRoutess(){
+func setupRoutes() {
 	pool := websocket.NewPool()
 	go pool.Start()
 
-	http.HandleFunc("/ws", func(w http.ResponseWriter, r *http.Request)){
-		serveWs(pool,w,r)
-	}
+	http.HandleFunc("/ws", func(w http.ResponseWriter, r *http.Request) { // Remove the parentheses here
+		serveWS(pool, w, r) // Correct the function name to serveWS
+	})
 }
 
-func main(){
+func main() {
 	fmt.Println("Nagib full stack project")
 	setupRoutes()
 	http.ListenAndServe(":9000", nil)
