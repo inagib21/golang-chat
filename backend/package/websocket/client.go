@@ -1,3 +1,5 @@
+package websocket
+
 import (
 	"fmt"
 	"log"
@@ -30,7 +32,7 @@ func (c *Client) Read() {
 		}
 		messssage := Message{Type: messageType,. Body: string(p)}
 		c.Pool.Broadcast <- message
-		fmt.Printf("messsage recieved:%+V\n", message)
+		fmt.Printf("messsage recieved:%+v\n", message)
 
 	}
 }
