@@ -15,13 +15,13 @@ GoChat is a real-time chat application built using React on the frontend and Go 
   - React: A popular JavaScript library for building user interfaces.
   - WebSocket: A protocol for full-duplex, bidirectional communication between a client and a server.
   - CSS: Styling for the frontend components.
-  - [Add any additional frontend technologies here] 📦
+  
 
 - **Backend:**
   - Go (Golang): A statically typed, compiled language known for its performance and efficiency.
   - Gorilla WebSocket: A Go package that provides WebSocket functionality.
   - HTTP: For handling initial connections and serving static files.
-  - [Add any additional backend technologies here] 🖥️
+    
 
 ## Installation 🚀
 
